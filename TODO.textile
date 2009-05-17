@@ -1,0 +1,7 @@
+h1. TODO/IDEAS
+
+Post.with_publish_status(:published)
+Post.with_publish_status(:published, :draft)
+
+Post.without_publish_status(:published)
+Post.without_publish_status(:published, :draft)

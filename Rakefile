@@ -37,6 +37,18 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
+begin
+  require 'rcov/rcovtask'
+  desc %Q{Analyze test coverage of the code in "#{NAME}".}
+  Rcov::RcovTask.new do |t|
+    t.libs << 'test'
+    t.test_files = FileList['test/**/*_test.rb']
+    t.verbose = true
+  end
+rescue LoadError
+  puts "RCov is not available. In order to run RCov, you must install it: sudo gem install spicycode-rcov -s http://gems.github.com"
+end
+
 desc %Q{Generate documentation for "#{NAME}".}
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'

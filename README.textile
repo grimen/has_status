@@ -1,3 +1,53 @@
 h1. HAS_STATUS
 
-Under construction. Boink-boink-boink! =)
+_The missing status/enum field helpers for ActiveRecord._
+
+h2. Installation
+
+<pre>sudo gem install grimen-has_status</pre>
+
+h2. Usage
+
+In your model:
+
+<pre>class Post < ActiveRecord:Base
+  
+  has_status :publish_status, [:draft, 'published', :some_status]
+  
+  has_status :priority, [:important, :no_priority], :labels => {:important => 'Important!', :no_priority => I18n.t('statuses.priority.low')}
+  
+end</pre>
+
+...gives:
+
+<pre>
+  @post.draft? # => @post == :draft, @post == 'draft'
+  @post.draft! # => @post = :draft
+  
+  @post.published? # => @post == :published, @post == 'published'
+  @post.published! # => @post = :published
+  
+  @post.has_publish_status?(:hello) # => @post == :hello, @post == 'hello'
+  @post.set_publish_status!(:hello) # => @post = :hello
+  
+  @post = :draft
+  @post.next_publish_status! # => @post = :published
+  @post = :draft
+  @post.previous_publish_status! # => @post = :some_status
+  
+  @post.publish_statuses_for_select # = [['Important!', 'important], ...]
+  
+  Post::PUBLISH_STATUSES # => [:draft, :published, :some_status]
+  Post::DEFAULT_PUBLISH_STATUS # => :published
+</pre>
+
+h2. More...?
+
+Things that passed my mind:
+
+* Implement named scopes, or finder methods.
+* Fix the :default_value option to work, now disabled.
+
+h2. License
+
+Copyright (c) 2009 Jonas Grimfelt, released under the MIT-license.
