@@ -12,7 +12,7 @@ In your model:
 
 <pre>class Post < ActiveRecord:Base
   
-  has_status :publish_status, [:draft, 'published', :some_status]
+  has_status :publish_status, [:draft, :published, :some_status], :default => :published
   
   has_status :priority, [:important, :no_priority], :labels => {:important => 'Important!', :no_priority => I18n.t('statuses.priority.low')}
   
@@ -35,6 +35,8 @@ end</pre>
   @post = :draft
   @post.previous_publish_status! # => @post = :some_status
   
+  @post.reset_published_status! # = @post = :published
+  
   @post.publish_statuses_for_select # = [['Important!', 'important], ...]
   
   Post::PUBLISH_STATUSES # => [:draft, :published, :some_status]
@@ -46,7 +48,7 @@ h2. More...?
 Things that passed my mind:
 
 * Implement named scopes, or finder methods.
-* Fix the :default_value option to work, now disabled.
+* Fix the :default option to work on initialize, now disabled.
 
 h2. License
 

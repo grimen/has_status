@@ -3,7 +3,7 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 NAME = "has_status"
-SUMMARY = %Q{}
+SUMMARY = %Q{The missing status/enum field helpers for ActiveRecord.}
 HOMEPAGE = "http://github.com/grimen/#{NAME}/tree/master"
 AUTHOR = "Jonas Grimfelt"
 EMAIL = "grimen@gmail.com"
