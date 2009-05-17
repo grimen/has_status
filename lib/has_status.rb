@@ -78,7 +78,7 @@ module HasStatus
       # Equivalent with: value!
       set_status_method_name = "set_#{status_field_name}!".to_sym
       define_method(set_status_method_name) do |value|
-        self.send(:"#{status_field_name}=", value.to_sym)
+        self.send(:"#{status_field_name}=", (value.to_sym rescue nil))
       end
       
       # Define: reset_{status}!

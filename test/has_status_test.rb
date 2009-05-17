@@ -97,7 +97,7 @@ class HasStatusTest < Test::Unit::TestCase
     should "reset the status to the default value with :reset_X!" do
       @post.published_status = :some_crazy_value
       @post.reset_published_status!
-      assert_equal :published, @post.published_status.to_sym
+      assert_equal Post::DEFAULT_PUBLISHED_STATUS, (@post.published_status.to_sym rescue nil)
     end
     
     should "generate correct form select options" do
